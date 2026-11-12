@@ -42,6 +42,8 @@ h1{font-size:clamp(2.1rem,5.5vw,3.6rem);line-height:.95;font-stretch:70%;font-we
 .focus-ctl{display:flex;flex-wrap:wrap;gap:4px;padding:4px;background:var(--surface);border:1px solid var(--line);border-radius:14px}
 .focus-ctl button{font:inherit;font-size:.9rem;font-stretch:88%;border:0;background:transparent;color:var(--ink);padding:6px 12px;border-radius:10px;cursor:pointer}
 .focus-ctl button[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
+.ctls{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+@media (max-width:900px){.ctls{align-items:flex-start}}
 .sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:7px}
 .sw.cpu{background:var(--cpu)}.sw.gpu{background:var(--gpu)}.sw.access{background:var(--access)}.sw.infra{background:var(--infra)}
 .steps ol{list-style:none;margin:0 0 14px;padding:0;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
@@ -107,8 +109,26 @@ svg text{font-family:"Archivo",system-ui,sans-serif}
 .c-gpu{fill:var(--gpu)}
 .c-port{fill:var(--on-gpu);opacity:.55}
 .c-bridge{fill:var(--ink)}
+.die{display:block;width:100%;height:auto;margin:4px 0 8px}
+.d-pkg{fill:var(--surface2);stroke:var(--line)}.d-die{fill:var(--chip)}.d-core{fill:var(--cpu)}.d-l3{fill:color-mix(in srgb,var(--cpu) 40%,var(--chip-ink))}
+.d-mc{fill:var(--dimm)}.d-io{fill:var(--infra)}.d-iot{fill:var(--on-infra)}.d-bridge{fill:var(--gpu)}
+.die-legend .sw.d-l3{background:color-mix(in srgb,var(--cpu) 40%,var(--chip-ink));outline:1px solid var(--line)}.die-legend .sw.d-core{background:var(--cpu)}.die-legend .sw.d-mc{background:var(--dimm)}
+.die-legend .sw.d-io{background:var(--infra)}.die-legend .sw.d-bridge{background:var(--gpu)}
+.c-migcut{stroke:var(--on-gpu);stroke-width:1.5;stroke-dasharray:3 3;opacity:.6}
 .c-fanband{fill:var(--surface)}
 .c-fan{fill:none;stroke:var(--muted);stroke-width:2}
+.fan-blade{transform-box:fill-box;transform-origin:center;animation:edge .9s linear infinite}
+.fan-blade .vis{fill:var(--muted);stroke:var(--muted);stroke-width:1.2;vector-effect:non-scaling-stroke}
+.fan-blade.accent .vis,.fan-rot .accent{fill:var(--cpu);stroke:var(--cpu)}
+.fan-hub{fill:var(--surface);stroke:var(--muted);stroke-width:1.5}
+.fan-air{fill:none;stroke:var(--muted);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;opacity:.6}
+/* One rotation of a 35°-pitched blade seen edge-on, from the 3D model in boardSVG; brighter when it swings toward you */
+@keyframes edge{0.00%{transform:skewX(-0.0deg) scaleX(1.000);opacity:0.60} 2.78%{transform:skewX(-13.9deg) scaleX(0.985);opacity:0.55} 5.56%{transform:skewX(-26.0deg) scaleX(0.940);opacity:0.50} 8.33%{transform:skewX(-35.5deg) scaleX(0.866);opacity:0.45} 11.11%{transform:skewX(-42.6deg) scaleX(0.766);opacity:0.41} 13.89%{transform:skewX(-47.6deg) scaleX(0.643);opacity:0.37} 16.67%{transform:skewX(-51.0deg) scaleX(0.500);opacity:0.34} 19.44%{transform:skewX(-53.3deg) scaleX(0.342);opacity:0.32} 22.22%{transform:skewX(-54.6deg) scaleX(0.174);opacity:0.30} 25.00%{transform:skewX(-55.0deg) scaleX(0.000);opacity:0.30} 27.78%{transform:skewX(-54.6deg) scaleX(-0.174);opacity:0.30} 30.56%{transform:skewX(-53.3deg) scaleX(-0.342);opacity:0.32} 33.33%{transform:skewX(-51.0deg) scaleX(-0.500);opacity:0.34} 36.11%{transform:skewX(-47.6deg) scaleX(-0.643);opacity:0.37} 38.89%{transform:skewX(-42.6deg) scaleX(-0.766);opacity:0.41} 41.67%{transform:skewX(-35.5deg) scaleX(-0.866);opacity:0.45} 44.44%{transform:skewX(-26.0deg) scaleX(-0.940);opacity:0.50} 47.22%{transform:skewX(-13.9deg) scaleX(-0.985);opacity:0.55} 50.00%{transform:skewX(-0.0deg) scaleX(-1.000);opacity:0.60} 52.78%{transform:skewX(13.9deg) scaleX(-0.985);opacity:0.65} 55.56%{transform:skewX(26.0deg) scaleX(-0.940);opacity:0.70} 58.33%{transform:skewX(35.5deg) scaleX(-0.866);opacity:0.75} 61.11%{transform:skewX(42.6deg) scaleX(-0.766);opacity:0.79} 63.89%{transform:skewX(47.6deg) scaleX(-0.643);opacity:0.83} 66.67%{transform:skewX(51.0deg) scaleX(-0.500);opacity:0.86} 69.44%{transform:skewX(53.3deg) scaleX(-0.342);opacity:0.88} 72.22%{transform:skewX(54.6deg) scaleX(-0.174);opacity:0.90} 75.00%{transform:skewX(55.0deg) scaleX(-0.000);opacity:0.90} 77.78%{transform:skewX(54.6deg) scaleX(0.174);opacity:0.90} 80.56%{transform:skewX(53.3deg) scaleX(0.342);opacity:0.88} 83.33%{transform:skewX(51.0deg) scaleX(0.500);opacity:0.86} 86.11%{transform:skewX(47.6deg) scaleX(0.643);opacity:0.83} 88.89%{transform:skewX(42.6deg) scaleX(0.766);opacity:0.79} 91.67%{transform:skewX(35.5deg) scaleX(0.866);opacity:0.75} 94.44%{transform:skewX(26.0deg) scaleX(0.940);opacity:0.70} 97.22%{transform:skewX(13.9deg) scaleX(0.985);opacity:0.65} 100.00%{transform:skewX(0.0deg) scaleX(1.000);opacity:0.60}}
+.fan-rot{fill:var(--muted);opacity:.8;transform-box:fill-box;transform-origin:center;animation:spin .9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.fan-call{fill:none;stroke:var(--muted);stroke-width:1.5;stroke-dasharray:4 3}
+.fan-arrow{fill:var(--muted)}
+@media (prefers-reduced-motion:reduce){.fan-blade,.fan-rot{animation:none}}
 .c-bay{fill:var(--surface);stroke:var(--muted)}
 .w-nv{stroke:var(--gpu);stroke-width:4;opacity:.7}
 .w-pc{fill:none;stroke:var(--muted);stroke-width:2;stroke-dasharray:5 4}
@@ -155,6 +175,36 @@ body{overflow-x:clip}
 .reader{position:absolute;left:72px;top:calc(50% - 30px);width:40px;height:60px;border-radius:6px;background:var(--chip);display:grid;place-items:center;box-shadow:0 2px 6px var(--door-shadow)}
 .led{width:9px;height:9px;border-radius:50%;background:#D64545;transition:background .2s,box-shadow .2s}
 .doors.unlock .led{background:#3BD17A;box-shadow:0 0 10px #3BD17A}
+/* lobby: wayfinding signs between the doors and the row */
+:root{--h-ceil:#E4E8E7;--h-side:#C3CBCA;--h-back:#D3D9D8;--h-floor:#8E999C;--h-line:#7A8588;--h-gap:#5F696D;--h-light:#FFFFFF;--h-sign:#1F2A31;--h-sign-ink:#F2F5F4}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--h-ceil:#1E2428;--h-side:#262E33;--h-back:#2D363B;--h-floor:#14191C;--h-line:#2F393E;--h-gap:#090C0E;--h-light:#C9D4D8;--h-sign:#0F1418;--h-sign-ink:#E5EAEA}}
+:root[data-theme="dark"]{--h-ceil:#1E2428;--h-side:#262E33;--h-back:#2D363B;--h-floor:#14191C;--h-line:#2F393E;--h-gap:#090C0E;--h-light:#C9D4D8;--h-sign:#0F1418;--h-sign-ink:#E5EAEA}
+.lobby{position:fixed;inset:0;z-index:45;display:none;align-items:flex-start;justify-content:center;padding:16px;background:var(--h-back);overflow:hidden}
+.lobby.show{display:flex;animation:lobbyin .4s ease-out}
+.lobby.leave{animation:walk .7s ease-in forwards;pointer-events:none}
+@keyframes lobbyin{from{opacity:0}to{opacity:1}}
+@keyframes walk{to{transform:scale(1.3);opacity:0}}
+.hall{position:absolute;inset:0;width:100%;height:100%}
+.h-ceil{fill:var(--h-ceil)}.h-side{fill:var(--h-side)}.h-back{fill:var(--h-back)}.h-floor{fill:var(--h-floor)}.h-gap{fill:var(--h-gap)}.h-light{fill:var(--h-light)}
+.h-line{stroke:var(--h-line);stroke-width:2}
+/* overhead wayfinding sign, hung from the ceiling on two rods */
+.hall-sign{position:relative;margin-top:clamp(70px,16vh,150px);background:var(--h-sign);color:var(--h-sign-ink);border-radius:8px;padding:10px 10px 12px;box-shadow:0 10px 30px rgba(0,0,0,.35);max-width:100%}
+.hall-sign::before,.hall-sign::after{content:"";position:absolute;bottom:100%;width:5px;height:100vh;background:var(--h-line)}
+.hall-sign::before{left:22%}.hall-sign::after{right:22%}
+.lobby-h{margin:0 0 8px;text-align:center;font-size:.75rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;opacity:.7}
+.signs{display:flex;flex-wrap:wrap;justify-content:center}
+.sign{font:inherit;display:flex;align-items:center;gap:18px;min-width:min(250px,100%);justify-content:space-between;background:transparent;color:inherit;border:0;border-radius:6px;padding:12px 22px;cursor:pointer;text-align:left}
+.sign.l{border-right:2px solid color-mix(in srgb,var(--h-sign-ink) 25%,transparent)}
+@media (max-width:560px){.sign.l{border-right:0;border-bottom:2px solid color-mix(in srgb,var(--h-sign-ink) 25%,transparent)}}
+.sign:hover{background:color-mix(in srgb,var(--h-sign-ink) 10%,transparent)}
+.sign b{display:block;font-stretch:70%;font-weight:820;font-size:clamp(1.8rem,5vw,2.8rem);line-height:1}
+.sign small{display:block;font-size:.9rem;opacity:.8;margin-top:4px}
+.sign .arrow{font-size:clamp(2rem,5vw,3rem);font-weight:700;line-height:1}
+.sign.l .arrow{animation:nudgel 1s ease-in-out infinite alternate}
+.sign.r .arrow{animation:nudger 1s ease-in-out infinite alternate}
+@keyframes nudgel{to{transform:translateX(-7px)}}
+@keyframes nudger{to{transform:translateX(7px)}}
+@media (prefers-reduced-motion:reduce){.lobby.show,.lobby.leave,.sign .arrow{animation:none}.wrap{transition:none}}
 /* the sysadmin: idle, then alarmed, then gone */
 .runner{position:absolute;left:0;top:0;z-index:40;pointer-events:none;transform:translateX(var(--rx,12vw))}
 .runner.go{animation:dash 2.4s cubic-bezier(.5,0,.75,1) forwards}
@@ -229,7 +279,7 @@ body{overflow-x:clip}
 </head>
 <body>
 <div class="doors" id="doors" aria-hidden="true">
-  <div class="door l"><div class="plate"><span class="plate-a">Della</span><span class="plate-b">Data hall, row 1</span></div><span class="handle"></span></div>
+  <div class="door l"><div class="plate"><span class="plate-a">Data Center-ish</span><span class="plate-b">Research Computing</span></div><span class="handle"></span></div>
   <div class="door r"><span class="handle"></span><div class="reader"><span class="led"></span></div></div>
 </div>
 <div class="runner" id="runner" aria-hidden="true">
@@ -257,12 +307,27 @@ body{overflow-x:clip}
   <g class="r-bubble"><rect x="60" y="-14" width="164" height="22" rx="11"/><path d="M72 7 L66 18 L81 7"/><text x="142" y="1" text-anchor="middle" font-size="10.5">Who rebooted the login node?!</text></g>
 </svg>
 </div>
+<div class="lobby" id="lobby" role="dialog" aria-modal="true" aria-labelledby="lobby-h">
+  <svg class="hall" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><polygon class="h-ceil" points="0,0 1600,0 1040,300 560,300"/><polygon class="h-floor" points="0,900 1600,900 1040,640 560,640"/><polygon class="h-side" points="0,0 560,300 560,640 0,900"/><polygon class="h-side" points="1600,0 1040,300 1040,640 1600,900"/><rect class="h-back" x="560" y="300" width="480" height="340"/><polygon class="h-gap" points="470,252 560,300 560,640 470,682"/><polygon class="h-gap" points="1130,252 1040,300 1040,640 1130,682"/><line class="h-line" x1="0" y1="900" x2="560" y2="640"/><line class="h-line" x1="200" y1="900" x2="620" y2="640"/><line class="h-line" x1="400" y1="900" x2="680" y2="640"/><line class="h-line" x1="600" y1="900" x2="740" y2="640"/><line class="h-line" x1="800" y1="900" x2="800" y2="640"/><line class="h-line" x1="1000" y1="900" x2="860" y2="640"/><line class="h-line" x1="1200" y1="900" x2="920" y2="640"/><line class="h-line" x1="1400" y1="900" x2="980" y2="640"/><line class="h-line" x1="1600" y1="900" x2="1040" y2="640"/><line class="h-line" x1="517" y1="660" x2="1083" y2="660"/><line class="h-line" x1="452" y1="690" x2="1148" y2="690"/><line class="h-line" x1="355" y1="735" x2="1245" y2="735"/><line class="h-line" x1="215" y1="800" x2="1385" y2="800"/><polygon class="h-light" points="647,18 953,18 937,62 663,62"/><polygon class="h-light" points="684,118 916,118 905,148 695,148"/><polygon class="h-light" points="713,196 887,196 879,218 721,218"/><polygon class="h-light" points="734,252 866,252 861,266 739,266"/></svg>
+  <div class="hall-sign">
+    <p class="lobby-h" id="lobby-h">Clusters</p>
+    <div class="signs">
+      <button class="sign l" data-cluster="adroit"><span class="arrow" aria-hidden="true">←</span><span><b>Adroit-ish</b><small>Teaching cluster</small></span></button>
+      <button class="sign r" data-cluster="della"><span><b>Della-ish</b><small>Research cluster</small></span><span class="arrow" aria-hidden="true">→</span></button>
+    </div>
+  </div>
+</div>
 <noscript><style>.doors,.runner{display:none}.wrap.arrive{transform:none;filter:none}</style></noscript>
 <div class="wrap arrive">
   <header>
     <div>
       <h1>Inside an HPC cluster</h1>
-      <p class="sub">What the machines behind high-performance computing actually look like, from a row of racks down to a single motherboard. Princeton’s Della cluster is the example throughout. Pick a rack, then a node, then look inside it.</p>
+      <p class="sub">What the machines behind high-performance computing actually look like, from a row of racks down to a single motherboard. You’re touring <span id="cname">Della</span>-ish: modeled on Princeton’s real cluster, but not a copy of it. Pick a rack, then a node, then look inside it.</p>
+    </div>
+    <div class="ctls">
+    <div class="focus-ctl cluster-ctl" role="group" aria-label="Cluster">
+      <button data-cluster="adroit" aria-pressed="false">Adroit-ish</button>
+      <button data-cluster="della" aria-pressed="true">Della-ish</button>
     </div>
     <div class="focus-ctl" role="group" aria-label="Highlight node types">
       <button data-focus="all" aria-pressed="true">All</button>
@@ -270,6 +335,7 @@ body{overflow-x:clip}
       <button data-focus="gpu" aria-pressed="false"><span class="sw gpu"></span>GPU</button>
       <button data-focus="access" aria-pressed="false"><span class="sw access"></span>Login and vis</button>
       <button data-focus="infra" aria-pressed="false"><span class="sw infra"></span>Services</button>
+    </div>
     </div>
   </header>
   <nav class="steps" aria-label="Level"><ol id="steps"></ol></nav>
@@ -281,7 +347,7 @@ body{overflow-x:clip}
 <noscript><p style="padding:20px">This page needs JavaScript to draw the cluster.</p></noscript>
 <script>
 /* ---------- Data: edit these to match reality ---------- */
-const TYPES = {
+const DELLA_TYPES = {
   cpuAmd:{kind:"cpu",name:"AMD CPU node",short:"EPYC 9654",vendor:"AMD",u:1,
     cpu:"2 × AMD EPYC 9654 (Genoa), 96 cores each",cores:192,clock:"2.4 GHz",mem:"1,500 GB",dimms:24,
     gpus:0,net:"HDR InfiniBand",drives:4,
@@ -342,8 +408,8 @@ const INFRA = {
   ood:{kind:"infra",name:"Open OnDemand server",short:"OnDemand",u:1,drives:2,
     blurb:"Runs the Open OnDemand web portal, where you can start Jupyter, RStudio or a full desktop on a vis or compute node from your browser."},
 };
-/* One row, a bit of everything. [type, count, label, host] */
-const RACKSPEC = [
+/* Della: one row, a bit of everything. [type, count, label, host] */
+const DELLA_RACKS = [
   {name:"Front door", items:[["loginCpu",1,"Login node (della)","della"],["loginGpu",1,"GPU login node (della-gpu)","della-gpu"],
     ["vis",1,"Vis node (della-vis1)","della-vis1"],["vis",1,"Vis node (della-vis2)","della-vis2"],
     ["ood",1],["svc",1,"Slurm controller"],["svc",1,"Slurm database"],["svc",1,"Monitoring"]]},
@@ -354,43 +420,100 @@ const RACKSPEC = [
   {name:"H200 (AI Lab)", items:[["h200",4]]},
 ];
 
+/* Adroit: small enough to show every compute node. Specs from RC's hardware table. */
+const ADROIT_TYPES = {
+  cpuSky:{kind:"cpu",name:"Skylake CPU node",short:"Skylake",vendor:"Intel",u:1,
+    cpu:"2 × Intel Xeon (Skylake), 16 cores each",cores:32,clock:"2.6 GHz",mem:"384 GB",dimms:12,
+    gpus:0,net:"InfiniBand",drives:2,
+    blurb:"Adroit’s older CPU nodes: 32 cores and 384 GB each. Plenty for learning MPI, OpenMP and job arrays."},
+  cpuIce:{kind:"cpu",name:"Ice Lake CPU node",short:"Ice Lake",vendor:"Intel",u:1,
+    cpu:"2 × Intel Xeon (Ice Lake), 32 cores each",cores:64,clock:"2.0 GHz",mem:"512 GB",dimms:16,
+    gpus:0,net:"InfiniBand",drives:2,
+    blurb:"Adroit’s newer CPU nodes: twice the cores of the Skylake nodes at a lower clock. When a job parallelizes well, more cores beat faster cores."},
+  a100:{kind:"gpu",name:"A100 node",short:"A100 ×4",vendor:"Intel",u:2,form:"pcie4",
+    cpu:"2 × Intel Xeon (Sapphire Rapids), 24 cores each",cores:48,clock:"2.6 GHz",mem:"1 TB",dimms:16,
+    gpus:4,gpu:"NVIDIA A100",gpuMem:"80 GB",net:"InfiniBand",drives:4,gres:"nvidia_a100:4",
+    slurmNote:"Name the GPU type (or add <code>--constraint=gpu80</code>). A bare <code>--gres=gpu:4</code> can also be filled by four MIG slices on the MIG node.",
+    gpuNote:"PCIe cards (nvidia-smi reports “NVIDIA A100 80GB PCIe”), the same GPU as Della’s 4-GPU A100 nodes. Whether NVLink bridges pair them up isn’t confirmed, so none are drawn.",
+    blurb:"Adroit’s full-size GPUs: four A100s with 80 GB each. Nearly the same box as Della’s most common GPU node, one CPU generation newer."},
+  mig:{kind:"gpu",name:"A100 MIG node",short:"MIG ×8",vendor:"Intel",u:2,form:"pcie4",mig:"3g.20gb",
+    cpu:"2 × Intel Xeon (Ice Lake), 24 cores each",cores:48,clock:"2.8 GHz",mem:"1 TB",dimms:16,
+    gpus:8,gpu:"A100 MIG slice (3g.20gb)",gpuMem:"20 GB",physical:"4 × A100 40GB, each split in two",net:"InfiniBand",drives:4,
+    specNote:"Whether these A100s are PCIe cards or SXM modules isn’t confirmed; they’re drawn as cards.",
+    slurmNote:"One program can use only one MIG slice, so ask for one per job (or per task).",
+    gpuNote:"Four A100 40GB cards, each carved by MIG (Multi-Instance GPU) into two isolated 3g.20gb slices. Each slice has its own memory and compute, about half a full A100, and Slurm hands them out as eight separate GPUs.",
+    blurb:"A whole A100 is often more GPU than a class exercise needs, so this node splits four of them into eight smaller GPUs. More people get a GPU at once."},
+  a40:{kind:"gpu",name:"A40 node",short:"A40 ×2",vendor:null,u:2,form:"pcie",
+    cpu:"2 × 48-core CPUs",cores:96,clock:"2.6 GHz",mem:"1 TB",dimms:16,
+    gpus:2,gpu:"NVIDIA A40",gpuMem:"48 GB",net:"InfiniBand",drives:4,gres:"nvidia_a40:2",
+    specNote:"RC’s table lists this CPU as Intel Skylake, but Slurm tags the node amd, so the vendor is left blank.",
+    gpuNote:"Same Ampere generation as the A100, with 48 GB per card, but built for graphics as much as compute. Strong for machine learning and rendering, weak at double precision (FP64), so FP64-heavy physics codes belong on the A100s.",
+    blurb:"Two A40s: lots of memory per card, aimed at ML and visualization rather than FP64 number-crunching."},
+  loginCpu:{...DELLA_TYPES.loginCpu,short:"adroit",reach:"ssh <YourNetID>@adroit.princeton.edu",
+    blurb:"The front door. Everyone who uses Adroit lands here first."},
+  vis:{...DELLA_TYPES.vis,reach:"ssh -X <YourNetID>@HOST.princeton.edu\n\nor start a Desktop session in Open OnDemand"},
+};
+const ADROIT_RACKS = [
+  {name:"Front door", items:[["loginCpu",1,"Login node (adroit)","adroit"],["vis",1,"Vis node (adroit-vis)","adroit-vis"],
+    ["ood",1],["svc",1,"Slurm controller"],["svc",1,"Slurm database"]]},
+  {name:"CPU nodes", items:[["cpuSky",4],["cpuIce",5]]},
+  {name:"GPU nodes", items:[["a100",1],["mig",1],["a40",1]]},
+];
+
+const CLUSTERS = {
+  adroit:{key:"adroit",name:"Adroit",types:ADROIT_TYPES,racks:ADROIT_RACKS,
+    title:"The whole cluster, in one row",
+    about:"Adroit is Princeton’s teaching cluster: small, but built from the same pieces as the big research clusters. Login nodes, CPU and GPU compute nodes, and services like the scheduler. Every compute node Adroit has is in this row.",
+    cpu:"in two generations",gpu:"one A100, one A100 split by MIG, one A40",
+    note:"Compute node counts and specs come from Research Computing’s hardware table. Rack positions, compute host names and the service nodes are illustrative. Networking and storage are left out on purpose."},
+  della:{key:"della",name:"Della",types:DELLA_TYPES,racks:DELLA_RACKS,
+    title:"One row, a bit of everything",
+    about:"The examples here come from Princeton’s Della cluster, but nearly every HPC cluster is built from the same pieces: login nodes, CPU and GPU compute nodes, and services like the scheduler. This row holds one of each, side by side.",
+    cpu:"including large-memory nodes",gpu:"from A100 to H200 and Grace Hopper",
+    note:"The layout is a teaching mash-up. Compute specs follow Research Computing’s hardware overview; quantities here are a sample, not Della’s real counts. Networking and storage are left out on purpose."},
+};
+
 /* ---------- Build ---------- */
-const RACKS = {}, NODES = {};
 const pad = n => String(n).padStart(2,"0");
-const RACKLIST = RACKSPEC.map((spec, i) => {
-  const id = "R" + pad(i+1);
-  const rack = {id,name:spec.name,items:[],nodes:[]};
-  const mk = (item, sled) => {
-    const k = rack.nodes.length + 1;
-    const node = {id:`${id}-${pad(k)}`,host:item.host || `della-${id.toLowerCase()}-${pad(k)}`,realHost:!!item.host,
-      t:item.t,key:item.key,rack,item,sled,label:item.label || item.t.name};
-    rack.nodes.push(node); item.nodes.push(node); NODES[node.id] = node;
-  };
-  let u = 1;
-  spec.items.forEach(([key, n, label, host]) => {
-    const t = TYPES[key] || INFRA[key];
-    if (t.perChassis) {
-      let left = n;
-      while (left > 0) {
-        const k = Math.min(t.perChassis, left); left -= k;
-        const item = {key,t,startU:u,u:t.u,nodes:[]};
-        for (let s = 0; s < k; s++) mk(item, s);
-        rack.items.push(item); u += t.u;
-      }
-    } else {
-      for (let j = 0; j < n; j++) {
-        const item = {key,t,startU:u,u:t.u,label,host,nodes:[]};
-        mk(item, null); rack.items.push(item); u += t.u;
-      }
-    }
-  });
-  rack.compute = rack.nodes.filter(n => n.t.kind === "cpu" || n.t.kind === "gpu");
-  RACKS[id] = rack;
-  return rack;
-});
 /* Drawing scale: equipment is 19 in wide and 1U is 1.75 in tall. Racks are drawn just tall enough for their contents (minimum 27U). */
 const U_RATIO = 19/1.75;
-const RACK_U = Math.max(27, ...RACKLIST.map(r => Math.max(...r.items.map(i => i.startU+i.u-1))));
+function build(c){
+  const RACKS = {}, NODES = {};
+  const RACKLIST = c.racks.map((spec, i) => {
+    const id = "R" + pad(i+1);
+    const rack = {id,name:spec.name,items:[],nodes:[]};
+    const mk = (item, sled) => {
+      const k = rack.nodes.length + 1;
+      const node = {id:`${id}-${pad(k)}`,host:item.host || `${c.key}-${id.toLowerCase()}-${pad(k)}`,realHost:!!item.host,
+        t:item.t,key:item.key,rack,item,sled,label:item.label || item.t.name};
+      rack.nodes.push(node); item.nodes.push(node); NODES[node.id] = node;
+    };
+    let u = 1;
+    spec.items.forEach(([key, n, label, host]) => {
+      const t = c.types[key] || INFRA[key];
+      if (t.perChassis) {
+        let left = n;
+        while (left > 0) {
+          const k = Math.min(t.perChassis, left); left -= k;
+          const item = {key,t,startU:u,u:t.u,nodes:[]};
+          for (let s = 0; s < k; s++) mk(item, s);
+          rack.items.push(item); u += t.u;
+        }
+      } else {
+        for (let j = 0; j < n; j++) {
+          const item = {key,t,startU:u,u:t.u,label,host,nodes:[]};
+          mk(item, null); rack.items.push(item); u += t.u;
+        }
+      }
+    });
+    rack.compute = rack.nodes.filter(n => n.t.kind === "cpu" || n.t.kind === "gpu");
+    RACKS[id] = rack;
+    return rack;
+  });
+  const RACK_U = Math.max(27, ...RACKLIST.map(r => Math.max(...r.items.map(i => i.startU+i.u-1))));
+  return {RACKS, NODES, RACKLIST, RACK_U};
+}
+let C, RACKS, NODES, RACKLIST, RACK_U;
 const sum = (arr, f) => arr.reduce((a, x) => a + f(x), 0);
 const fmt = n => n.toLocaleString("en-US");
 const hasBoard = t => t.kind !== "infra";
@@ -401,6 +524,15 @@ const stage = document.getElementById("stage");
 const panel = document.getElementById("panel");
 const stepsEl = document.getElementById("steps");
 let viaKeyboard = false;
+function useCluster(key){
+  C = CLUSTERS[key];
+  ({RACKS, NODES, RACKLIST, RACK_U} = build(C));
+  Object.assign(S, {level:0,rack:null,node:null,part:null});
+  document.getElementById("cname").textContent = C.name;
+  document.querySelectorAll(".cluster-ctl button").forEach(b => b.setAttribute("aria-pressed", b.dataset.cluster === key));
+}
+/* ?cluster=adroit skips the lobby, so a class can be sent straight to its cluster */
+const PRESET = (k => CLUSTERS[k] ? k : null)(new URLSearchParams(location.search).get("cluster"));
 
 const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 const hit = (attr, val, label, inner, x, y, w, h, extra="") =>
@@ -411,10 +543,11 @@ const txt = (x, y, s, cls="t", size=12, anchor="start", extra="") =>
 /* ---------- Level 0: the row ---------- */
 function viewRow(){
   const n = RACKLIST.length, MW=104, GAP=16, PAD=20, UH=(MW-10)/U_RATIO, top=40, MH=RACK_U*UH+8;
-  const W = PAD*2 + n*MW + (n-1)*GAP, H = top + MH + 92;
+  /* Short rows (Adroit) are centered in a minimum width so they aren't blown up to fill the stage */
+  const rowW = n*MW + (n-1)*GAP, W = Math.max(640, PAD*2 + rowW), X0 = (W - rowW)/2, H = top + MH + 92;
   let s = "";
   RACKLIST.forEach((r, i) => {
-    const x = PAD + i*(MW+GAP);
+    const x = X0 + i*(MW+GAP);
     let inner = `<rect class="rail" x="${x}" y="${top}" width="${MW}" height="${MH}" rx="3"/>`;
     r.items.forEach(it => {
       const y = top + 4 + (RACK_U-(it.startU+it.u-1))*UH, h = it.u*UH - 1, k = it.t.kind;
@@ -438,18 +571,18 @@ function viewRow(){
   stage.innerHTML = `<div class="scroll"><svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:${W}px;min-width:640px" role="group" aria-label="Front view of a row of racks">${s}</svg></div>`;
   const all = Object.values(NODES);
   const count = k => all.filter(x => x.t.kind === k).length;
-  panel.innerHTML = `<h2>One row, a bit of everything</h2>
-    <p class="lead">An HPC cluster is hundreds of separate computers, called nodes, standing in racks. A fast network and a shared scheduler make them behave like one machine.</p>
-    <p>The examples here come from Princeton’s Della cluster, but nearly every HPC cluster is built from the same pieces: login nodes, CPU and GPU compute nodes, and services like the scheduler. This row holds one of each, side by side.</p>
+  panel.innerHTML = `<h2>${C.title}</h2>
+    <p class="lead">An HPC cluster is many separate computers, called nodes, standing in racks. A fast network and a shared scheduler make them behave like one machine.</p>
+    <p>${C.about}</p>
     <ul class="legend">
-      <li><span class="sw cpu"></span>${count("cpu")} CPU nodes, including large-memory nodes</li>
-      <li><span class="sw gpu"></span>${count("gpu")} GPU nodes, from A100 to H200 and Grace Hopper</li>
+      <li><span class="sw cpu"></span>${count("cpu")} CPU nodes, ${C.cpu}</li>
+      <li><span class="sw gpu"></span>${count("gpu")} GPU nodes: ${C.gpu}</li>
       <li><span class="sw access"></span>${count("access")} login and vis nodes, the parts you touch directly</li>
       <li><span class="sw infra"></span>${count("infra")} service nodes: scheduler, web portal, monitoring</li>
     </ul>
     <p>In the real data hall, similar hardware is grouped by row because power and cooling needs differ so much. A rack of 8-GPU nodes can pull ten times the power of a rack of CPU nodes.</p>
     <p class="hint">Pick a rack.</p>
-    <p class="note">The layout is a teaching mash-up. Compute specs follow Research Computing’s hardware overview; quantities here are a sample, not Della’s real counts. Networking and storage are left out on purpose.</p>`;
+    <p class="note">${C.note}</p>`;
 }
 
 /* ---------- Level 1: rack ---------- */
@@ -554,7 +687,7 @@ function viewNode(){
       <p class="note">No board tour for this one.</p>`;
     return;
   }
-  const gpuLine = t.gpus ? `${t.gpus} × ${t.gpu}${t.gpuMem ? ", "+t.gpuMem+(t.gpus > 1 ? " each" : "") : ""}` : "None";
+  const gpuLine = t.gpus ? `${t.gpus} × ${t.gpu}${t.gpuMem ? ", "+t.gpuMem+(t.gpus > 1 ? " each" : "") : ""}${t.physical ? ` (${t.physical})` : ""}` : "None";
   const specs = t.placeholder
     ? `<dt>GPUs</dt><dd>${t.gpus ? "Yes" : "None"}</dd><dt>Internet</dt><dd>Yes, through the campus network</dd><dt>Location</dt><dd>${where}</dd>`
     : `<dt>Processors</dt><dd>${t.cpu}</dd>${t.clock ? `<dt>Clock</dt><dd>${t.clock}</dd>` : ""}<dt>Cores</dt><dd>${t.cores}</dd>
@@ -566,14 +699,17 @@ function viewNode(){
       <p class="note">Hardware details for this node aren’t in the public docs, so the board inside is a generic stand-in.</p>`;
   } else {
     const cpt = t.gpus ? Math.floor(t.cores / t.gpus) : 0;
-    const req = t.gpus
-      ? `#SBATCH --nodes=1\n#SBATCH --ntasks=${t.gpus}\n#SBATCH --cpus-per-task=${cpt}\n#SBATCH --gres=gpu:${t.gpus}\n#SBATCH --time=01:00:00`
+    const req = t.mig
+      ? `#SBATCH --nodes=1\n#SBATCH --ntasks=1\n#SBATCH --cpus-per-task=${cpt}\n#SBATCH --gres=gpu:${t.mig}:1\n#SBATCH --time=01:00:00`
+      : t.gpus
+      ? `#SBATCH --nodes=1\n#SBATCH --ntasks=${t.gpus}\n#SBATCH --cpus-per-task=${cpt}\n#SBATCH --gres=gpu:${t.gres || t.gpus}\n#SBATCH --time=01:00:00`
       : `#SBATCH --nodes=1\n#SBATCH --ntasks=${t.cores}\n#SBATCH --time=01:00:00`;
     body = `<h3>How Slurm sees it</h3><pre>Cores ${t.cores}   Memory ${t.form === "gh" ? "on-module" : "~"+t.mem}   GPUs ${t.gpus}</pre>
-      <h3>Asking for the whole node</h3><pre>${req}</pre>
+      <h3>${t.mig ? "Asking for one slice" : "Asking for the whole node"}</h3><pre>${req}</pre>
+      ${t.slurmNote ? `<p class="note">${t.slurmNote}</p>` : ""}
       ${t.restricted ? `<p class="note">Only ${t.restricted} can run on these nodes.</p>` : ""}
       ${t.typical ? `<p class="note">Specs shown are a typical GH200 configuration; Della’s exact one may differ.</p>` : ""}
-      <p class="note">Host name ${n.host} is illustrative.</p>`;
+      <p class="note">${n.realHost ? `${n.host} is this node’s real name. From a login node, <code>scontrol show node ${n.host}</code> shows how Slurm sees it.` : `Host name ${n.host} is illustrative.`}</p>`;
   }
   panel.innerHTML = `<h2>${esc(t.kind === "access" ? n.label : t.name)}</h2>
     <p class="lead">${t.blurb}</p><dl class="specs">${specs}</dl>${body}
@@ -665,6 +801,17 @@ function boardSVG(t){
     });
     o.push(P("gpu",`${t.gpus} GPUs`,gp), P("bridge","NVLink bridges",br));
     y += 18 + gh + 30;
+  } else if (t.form === "pcie4") {
+    const cw = (W-60-3*24)/4, gh = 56; let gp = "";
+    for (let c=0; c<4; c++) {
+      const x = 30+c*(cw+24);
+      gp += t.mig
+        ? `<rect class="c-gpu" x="${x}" y="${y}" width="${cw}" height="${gh}" rx="4"/><line class="c-migcut" x1="${x+cw/2}" y1="${y+22}" x2="${x+cw/2}" y2="${y+gh-6}"/>` +
+          L(x+cw/2, y+16, "A100 40GB, MIG", "og", 11) + L(x+cw/4, y+43, "20 GB", "og", 11) + L(x+3*cw/4, y+43, "20 GB", "og", 11)
+        : card(x, y, cw, gh, gl+" (PCIe card)", t.gpuMem);
+      gpuBoxes.push({cx:x+cw/2,bottom:y+gh});
+    }
+    o.push(P("gpu", t.mig ? "4 GPUs split into 8 MIG slices" : `${t.gpus} GPUs`, gp)); y += gh + 30;
   } else if (t.form === "pcie") {
     const cw = 220, gh = 56, xs = t.gpus === 1 ? [W/2] : SX; let gp = "";
     xs.forEach(x => { gp += card(x-cw/2, y, cw, gh, gl+" (PCIe card)", t.gpuMem); gpuBoxes.push({cx:x,bottom:y+gh}); });
@@ -718,21 +865,114 @@ function boardSVG(t){
   o.push(P("bmc","BMC chip",`<rect class="c-chip" x="${W/2+40}" y="${y}" width="130" height="24" rx="3"/>${L(W/2+105,y+16,"BMC","ci",11)}`));
   const fy = y + 40;
   let fans = `<rect class="c-fanband" x="30" y="${fy}" width="${W-60}" height="46" rx="4"/>`;
-  for (let i=0; i<9; i++) fans += `<circle class="c-fan" cx="${80+i*((W-160)/8)}" cy="${fy+23}" r="16"/>`;
+  const FAN_PERIODS = [.84,1,.76,.94,.88,1.04,.8,.98,.9];
+  /* One rotor drives both views: 3 blades 120° apart, pitched 35°, turning clockwise as seen in the face-on callout.
+     From above, the axis points to the rear, so a blade at angle θ shows as a paddle reaching r·cos θ from the hub,
+     slanted by its pitch in proportion to sin θ: scaleX(cos θ) then skewX(atan(cot 35° · sin θ)). */
+  const PITCH_COT = 1/Math.tan(35*Math.PI/180);
+  const blade = (k, per, accent) => {
+    const th = -k*2*Math.PI/3, skew = Math.atan(PITCH_COT*Math.sin(th))*180/Math.PI;
+    return `<g class="fan-blade${accent ? " accent" : ""}" transform="skewX(${skew.toFixed(1)}) scale(${Math.cos(th).toFixed(3)} 1)" style="animation-duration:${per}s;animation-delay:${(-k*per/3).toFixed(3)}s">` +
+      `<rect x="-26" y="-4" width="52" height="8" style="fill:none;stroke:none"/><rect class="vis" x="6" y="-4" width="20" height="8" rx="2"/></g>`;
+  };
+  for (let i=0; i<9; i++) {
+    fans += `<g transform="translate(${80+i*((W-160)/8)} ${fy+23})"><rect class="c-fan" x="-32" y="-15" width="64" height="30" rx="3"/>` +
+      `<rect class="fan-hub" x="-6" y="-12" width="12" height="24" rx="2"/>${[0,1,2].map(k => blade(k, FAN_PERIODS[i], i === 8 && k === 0)).join("")}</g>`;
+  }
+  for (let i=0; i<8; i++) {
+    const ax = 80+(i+.5)*((W-160)/8);
+    fans += `<path class="fan-air" d="M${ax-5} ${fy+27} l5 -6 l5 6"/>`;
+  }
+  /* Callout: the last fan seen from the front, since an edge-on rotor doesn't read as a fan */
+  const ix = W-58, iy = fy+92, fx = 80+8*((W-160)/8), x1 = fx+4, y1 = fy+40, x2 = ix-14, y2 = iy-28;
+  const len = Math.hypot(x2-x1, y2-y1), ux = (x2-x1)/len, uy = (y2-y1)/len, bx = x2-ux*9, by = y2-uy*9;
+  // The last fan above, tipped toward you (as seen from the cold aisle). Blade k starts at k·120° clockwise from +x; the colored blade is the same one in both views.
+  const blades = [0,1,2].map(k => `<path${k ? "" : ' class="accent"'} transform="rotate(${90+k*120})" d="M0 -3 C6 -6 7 -12 2 -14 C-2 -10 -2 -6 0 -3Z"/>`).join("");
+  fans += `<path class="fan-call" d="M${x1} ${y1} L${bx.toFixed(1)} ${by.toFixed(1)}"/>` +
+    `<path class="fan-arrow" d="M${x2} ${y2} L${(bx-uy*4.5).toFixed(1)} ${(by+ux*4.5).toFixed(1)} L${(bx+uy*4.5).toFixed(1)} ${(by-ux*4.5).toFixed(1)}Z"/>` +
+    `<g transform="translate(${ix} ${iy}) scale(1.6)"><circle class="c-fan" r="16" style="stroke-width:1.4"/>` +
+    `<g class="fan-rot" style="animation-duration:${FAN_PERIODS[8]}s"><circle r="13.5" style="fill:none;stroke:none"/>${blades}<circle class="fan-hub" r="3"/></g></g>` +
+    L(ix, iy+42, "Front view", "tm", 11);
   o.push(P("fans","Fans",fans));
   const pcb = `<rect class="c-pcb" x="22" y="${pcbTop}" width="${W-44}" height="${fy-pcbTop-8}" rx="4"/>`;
   const dy = fy + 64, nd = t.drives || 2, step = 76;
   let dr = "";
   for (let i=0; i<nd; i++) dr += `<rect class="c-bay" x="${W/2-(nd*step-12)/2+i*step}" y="${dy}" width="64" height="26" rx="2"/>`;
   o.push(P("drives","Front drives",dr), L(30, dy+50, "Front of chassis", "tm", 12, "start"));
-  const H = dy + 64;
+  const H = dy + 84;
   return `<svg viewBox="0 0 ${W} ${H}" role="group" aria-label="Schematic of a ${t.name} board"><rect class="c-chassis" x="12" y="8" width="${W-24}" height="${H-16}" rx="8"/>${pcb}${under.join("")}${o.join("")}</svg>`;
+}
+/* ---------- Inside one CPU: drawn from how each chip family is actually built ---------- */
+function coreDiagram(t, grace){
+  const n = grace ? 72 : t.cores/2, cpu = t.cpu || "";
+  if (!n || t.placeholder) return "";
+  const W = 310, amd = !grace && t.vendor === "AMD";
+  const gen = (cpu.match(/Skylake|Cascade Lake|Ice Lake|Sapphire Rapids|Emerald Rapids|Rome|Genoa/) || [""])[0];
+  // Big Sapphire/Emerald Rapids parts are multi-tile; smaller models may be a single die, so those are drawn as one
+  const tiles = gen === "Sapphire Rapids" && n > 32 ? 4 : gen === "Emerald Rapids" && n > 32 ? 2 : 1;
+  const grid = (x, y, w, h, k) => {
+    // Columns: the divisor of k closest to the aspect-matched ideal, so the grid has no empty slots
+    const ideal = Math.sqrt(k*w/h), divs = [...Array(k).keys()].map(i => i+1).filter(d => k % d === 0);
+    const cols = divs.reduce((a, d) => Math.abs(d-ideal) < Math.abs(a-ideal) ? d : a), rows = k/cols, cw = w/cols, ch = h/rows; let g = "";
+    for (let i=0; i<k; i++) {
+      const cx = x+(i%cols)*cw, cy = y+Math.floor(i/cols)*ch;
+      g += `<rect class="d-core" x="${cx+1.5}" y="${cy+1.5}" width="${cw*.6-1.5}" height="${ch-3}" rx="1.5"/><rect class="d-l3" x="${cx+cw*.6+.5}" y="${cy+1.5}" width="${cw*.4-2}" height="${ch-3}" rx="1"/>`;
+    }
+    return g;
+  };
+  let s = "", H, text, legend = [["core","Core, with its own L1 and L2 cache"],["l3","Slice of shared L3 cache"]];
+  if (amd) {
+    const ccx = gen === "Rome" ? 4 : 8, ccds = Math.round(n/8), rowsPer = Math.ceil(ccds/4), ch = 50, cw = 48;
+    H = 24 + rowsPer*(ch+8);
+    const io = {x:W/2-36, y:14, w:72, h:H-28};
+    s += `<rect class="d-pkg" x="0" y="0" width="${W}" height="${H}" rx="8"/><rect class="d-io" x="${io.x}" y="${io.y}" width="${io.w}" height="${io.h}" rx="4"/>` +
+      txt(W/2, H/2-8, "I/O die", "d-iot tc tb", 12, "middle") + txt(W/2, H/2+7, "memory", "d-iot tc", 10, "middle") + txt(W/2, H/2+19, "and PCIe", "d-iot tc", 10, "middle");
+    const xs = [10, 10+cw+6, W-10-2*cw-6, W-10-cw];
+    for (let i=0; i<ccds; i++) {
+      const x = xs[i%4], y = 12+Math.floor(i/4)*(ch+8);
+      s += `<rect class="d-die" x="${x}" y="${y}" width="${cw}" height="${ch}" rx="3"/>`;
+      for (let r=0; r<4; r++) [0,1].forEach(c => { s += `<rect class="d-core" x="${x+3+c*(cw-17)}" y="${y+3+r*11.25}" width="11" height="9.25" rx="1.5"/>`; });
+      s += ccx === 4
+        ? `<rect class="d-l3" x="${x+16}" y="${y+3}" width="${cw-32}" height="20.5" rx="1"/><rect class="d-l3" x="${x+16}" y="${y+26.5}" width="${cw-32}" height="20.5" rx="1"/>`
+        : `<rect class="d-l3" x="${x+16}" y="${y+3}" width="${cw-32}" height="${ch-6}" rx="1"/>`;
+    }
+    legend.push(["io","I/O die: memory controllers and PCIe"]);
+    text = `${gen ? `EPYC ${gen} isn’t one big chip.` : "This EPYC isn’t one big chip."} It’s ${ccds} small core dies (CCDs), 8 cores each, around a central I/O die that talks to memory and PCIe. ${ccx === 4 ? "Inside a CCD, each group of 4 cores shares an L3 cache." : "The 8 cores on a CCD share one L3 cache."} Data cached on another CCD has to travel through the I/O die, so threads that share data run fastest on cores close together.`;
+  } else {
+    const dw = tiles === 1 ? W-20 : (W-30)/2, dh = tiles === 4 ? 78 : 130, per = n/tiles;
+    H = 20 + (tiles === 4 ? 2*dh+10 : dh);
+    s += `<rect class="d-pkg" x="0" y="0" width="${W}" height="${H}" rx="8"/>`;
+    for (let i=0; i<tiles; i++) {
+      const left = tiles === 1 || i%2 === 0, x = tiles === 1 ? 10 : left ? 10 : 20+dw, y = 10+Math.floor(i/2)*(dh+10);
+      s += `<rect class="d-die" x="${x}" y="${y}" width="${dw}" height="${dh}" rx="4"/>`;
+      // memory controllers on the outer edges, where the DIMM channels leave the chip
+      if (tiles === 1 || left) s += `<rect class="d-mc" x="${x+3}" y="${y+6}" width="7" height="${dh-12}" rx="1.5"/>`;
+      if (tiles === 1 || !left) s += `<rect class="d-mc" x="${x+dw-10}" y="${y+6}" width="7" height="${dh-12}" rx="1.5"/>`;
+      s += grid(x+(tiles === 1 || left ? 13 : 3), y+4, dw-(tiles === 1 ? 26 : 16), dh-8, per);
+    }
+    if (tiles > 1) {
+      for (let r=0; r<tiles/2; r++) s += `<rect class="d-bridge" x="${W/2-6}" y="${10+r*(dh+10)+dh/2-8}" width="12" height="16" rx="2"/>`;
+      if (tiles === 4) [W/4, 3*W/4].forEach(cx => { s += `<rect class="d-bridge" x="${cx-8}" y="${10+dh+2}" width="16" height="6" rx="2"/>`; });
+      legend.push(["bridge","Silicon bridges (EMIB) joining the tiles"]);
+    }
+    legend.push(["mc","Memory controllers"]);
+    text = grace
+      ? "All 72 Arm cores share one die, linked by a mesh, with the L3 cache spread across it. Memory is LPDDR5X on the module rather than DIMMs."
+      : tiles > 1
+      ? `${n} cores split across ${tiles} tiles, joined by tiny silicon bridges so the operating system sees one CPU. Each tile has its own cores, L3 slices and memory controllers; reaching memory on another tile costs a little extra latency.`
+      : !t.vendor
+      ? `A generic layout with ${n} cores, each with its own L1/L2 cache and a slice of shared L3. This node’s exact chip isn’t confirmed, so treat the arrangement as illustrative.`
+      : `${n} cores on one piece of silicon, linked by a mesh. Each core has its own small, fast L1 and L2 caches, with a slice of the shared L3 beside it. Memory controllers sit at the edges, and any core can reach any memory channel through the mesh.${/Sapphire|Emerald/.test(gen) ? ` Depending on the model, ${gen} comes as one die or several tiles; it’s drawn as one here.` : ""}`;
+  }
+  return `<h3>Inside one CPU</h3><svg class="die" viewBox="0 0 ${W} ${H}" role="img" aria-label="Diagram of one CPU package with ${n} cores">${s}</svg>
+    <ul class="legend die-legend">${legend.map(([k, l]) => `<li><span class="sw d-${k}"></span>${l}</li>`).join("")}</ul>
+    <p>${text}</p><p class="note">${grace ? "" : `This node has two of these: ${t.cores} cores in all. `}Schematic: real dies also hold disabled spare cores, and the true floorplan differs.</p>`;
 }
 function partInfo(p, t){
   const ic = t.vendor === "AMD" ? "Infinity Fabric" : t.vendor === "Intel" ? "UPI" : "socket interconnect";
   const cpuDesc = t.placeholder ? "Two server CPUs (model not listed in the public docs)." : `${t.cpu}${t.clock ? ", "+t.clock : ""}.`;
   const map = {
-    socket:["CPU sockets",`${cpuDesc} Each socket and the memory wired to it form a NUMA domain. A core reaching memory on the other socket crosses the ${ic} link and pays extra latency, which is why Slurm can pin tasks to cores.`],
+    socket:["CPU sockets",`${cpuDesc} Each socket and the memory wired to it form a NUMA domain. A core reaching memory on the other socket crosses the ${ic} link and pays extra latency, which is why Slurm can pin tasks to cores.`, coreDiagram(t)],
     dimm:["Memory (DIMMs)", t.dpc > 1
       ? `${t.dimms} slots holding ${t.mem}, with two DIMMs on every memory channel. That trades a little memory speed for a lot of capacity, which is the whole point of a large-memory node.`
       : t.placeholder ? `${t.dimms} DIMM slots split evenly between the two sockets. Filling every channel maximizes memory bandwidth.`
@@ -759,7 +999,7 @@ function partInfo(p, t){
     fans:["Fan wall","Pulls cold-aisle air in the front, across the drives, memory, CPUs and GPUs, and out the back into the hot aisle."],
     io:["Rear I/O","Ethernet for the management network, a dedicated BMC port, and service ports. Nobody plugs a monitor in here day to day."],
     module:["GH200 superchip","Instead of a CPU in a socket and a GPU on a PCIe card, Grace Hopper puts both on one module with their memory right beside them. No DIMM slots, no PCIe hop between CPU and GPU."],
-    grace:["Grace CPU","NVIDIA’s Arm-based CPU with 72 cores. Code built for x86 (Intel or AMD) won’t run here until it’s rebuilt for Arm (aarch64), so check that your modules and conda packages exist for this architecture."],
+    grace:["Grace CPU","NVIDIA’s Arm-based CPU with 72 cores. Code built for x86 (Intel or AMD) won’t run here until it’s rebuilt for Arm (aarch64), so check that your modules and conda packages exist for this architecture.", coreDiagram(t, true)],
     lpddr:["LPDDR5X memory","Low-power memory soldered right beside the CPU instead of in DIMM slots. It can’t be upgraded, but it’s fast and frugal. Up to 480 GB in a typical configuration."],
     hopper:["Hopper GPU","The GPU half of the module, an H100-class Hopper GPU. To CUDA it looks like any other NVIDIA GPU."],
     hbm:["HBM stacks",`High-bandwidth memory stacked beside the GPU die: ${t.gpuMem}. Terabytes per second, far faster than CPU memory.`],
@@ -786,18 +1026,19 @@ function viewBoard(){
     hgx:"Eight SXM GPUs on their own baseboard, wired all-to-all through NVSwitch.",
     pcie8:"Eight upright PCIe cards in two groups of four, one group per CPU socket, each group joined by an NVLink bridge.",
     pairs:"Four PCIe GPU cards, bridged together in pairs.",
+    pcie4: t.mig ? "Four A100 cards, each split by MIG into two 20 GB GPUs." : "Four PCIe GPU cards, each wired to the CPUs through the motherboard.",
     pcie: t.gpus === 1 ? "A single PCIe GPU card." : "Two PCIe GPU cards wired straight to the CPUs.",
     vis:"A single graphics-capable GPU, plus a campus network card.",
     gh:"No sockets and no DIMM slots: one module holds the CPU, the GPU and their memory."
   }[t.form] || (t.dpc > 1 ? "CPU only, with two DIMMs per memory channel for extra capacity." : "CPU only: two sockets and their memory.");
-  const specLine = t.placeholder ? "Della’s hardware for this node isn’t publicly documented, so treat it as a generic stand-in."
+  const specLine = (t.placeholder ? `${C.name}’s hardware for this node isn’t publicly documented, so treat it as a generic stand-in.`
     : t.typical ? "Specs follow a typical GH200 configuration."
     : t.bestGuess ? "The CPUs, memory and GPUs match Research Computing’s published specs; the bridges, switches, network wiring and power supplies are educated guesses."
-    : "The CPU, memory and GPU specs match Research Computing’s published hardware list.";
+    : "The CPU, memory and GPU specs match Research Computing’s published hardware list.") + (t.specNote ? " " + t.specNote : "");
   stage.innerHTML = boardSVG(t) + `<p class="caption">Looking down through the lid. Schematic, not to scale.</p>`;
   panel.innerHTML = `<h2>Inside: ${esc(S.node.t.kind === "access" ? S.node.label : t.name)}</h2>
     <p class="lead">${designNote}</p>
-    <div class="disclaimer"><strong>Simplified, not Della’s actual hardware.</strong> These diagrams show a basic setup for this kind of node. The real boards in Della may use different parts, counts, placement and wiring. ${specLine}</div>
+    <div class="disclaimer"><strong>Simplified, not ${C.name}’s actual hardware.</strong> These diagrams show a basic setup for this kind of node. The real boards in ${C.name} may use different parts, counts, placement and wiring. ${specLine}</div>
     <p class="hint">Pick a part to see what it does.</p>
     <div class="chips">${partKeys(t).map(k => `<button data-part="${k}" aria-pressed="false">${partInfo(k,t)[0]}</button>`).join("")}</div>
     <div class="partinfo" id="partInfo" aria-live="polite"><p class="note">Nothing selected yet.</p></div>`;
@@ -807,8 +1048,8 @@ function updatePart(){
   stage.querySelectorAll(".part").forEach(g => g.classList.toggle("active", g.dataset.part === S.part));
   panel.querySelectorAll(".chips button").forEach(b => b.setAttribute("aria-pressed", b.dataset.part === S.part));
   if (S.part) {
-    const [title, body] = partInfo(S.part, S.node.t);
-    document.getElementById("partInfo").innerHTML = `<h3 style="margin-top:0">${title}</h3><p>${body}</p>`;
+    const [title, body, extra = ""] = partInfo(S.part, S.node.t);
+    document.getElementById("partInfo").innerHTML = `<h3 style="margin-top:0">${title}</h3><p>${body}</p>${extra}`;
   }
 }
 
@@ -848,31 +1089,81 @@ panel.addEventListener("click", e => {
 panel.addEventListener("keydown", e => {
   if (e.key === "Escape") panel.querySelectorAll(".ex-btn").forEach(b => { b.setAttribute("aria-expanded", "false"); b.blur(); });
 });
-document.querySelectorAll(".focus-ctl button").forEach(b => b.addEventListener("click", () => {
+document.querySelectorAll("[data-focus]").forEach(b => b.addEventListener("click", () => {
   document.documentElement.dataset.focus = b.dataset.focus;
-  document.querySelectorAll(".focus-ctl button").forEach(x => x.setAttribute("aria-pressed", x === b));
+  document.querySelectorAll("[data-focus]").forEach(x => x.setAttribute("aria-pressed", x === b));
 }));
+document.querySelectorAll(".cluster-ctl button").forEach(b => b.addEventListener("click", () => {
+  if (b.dataset.cluster === C.key) return;
+  useCluster(b.dataset.cluster); render(); playGag(900);
+}));
+useCluster(PRESET || "della");
 render();
 
 /* ---------- Entrance ---------- */
-(function(){
-  const doors = document.getElementById("doors"), wrap = document.querySelector(".wrap"), runner = document.getElementById("runner");
-  if (matchMedia("(prefers-reduced-motion: reduce)").matches) { doors.remove(); runner.remove(); wrap.classList.remove("arrive"); return; }
-  // Find where the cold aisle will sit once the page settles, so the sysadmin runs along it
+const JOKES = [
+  "Who rebooted the login node?!",
+  "Who’s running Python on the login node?!",
+  "/tmp just hit 100%!",
+  "Who submitted 50,000 array jobs?!",
+  "Two million files in ONE directory?!",
+  "Someone asked for --time=30-00:00:00!",
+  "Jupyter on the login node AGAIN?!",
+  "The chiller’s out! Grab the box fans!",
+  "Who unplugged the coffee machine?!",
+  "Who’s training an LLM on the vis node?!",
+];
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const wrap = document.querySelector(".wrap");
+const runnerTpl = document.getElementById("runner");
+runnerTpl.remove();
+let lastJoke = -1, gagTimers = [];
+function spawnRunner(){
+  const r = runnerTpl.cloneNode(true); r.removeAttribute("id");
+  let i; do i = Math.floor(Math.random()*JOKES.length); while (i === lastJoke); lastJoke = i;
+  const label = r.querySelector(".r-bubble text"), box = r.querySelector(".r-bubble rect"), w = Math.round(JOKES[i].length*5.2 + 18);
+  label.textContent = JOKES[i]; box.setAttribute("width", w); label.setAttribute("x", 60 + w/2);
+  // Measure where the cold aisle sits once the zoom-in settles, so the sysadmin stands on it
+  const zoomed = wrap.classList.contains("arrive");
   wrap.style.transition = "none"; wrap.classList.remove("arrive");
   const band = stage.querySelector(".band-cold"), br = band ? band.getBoundingClientRect() : null;
   const feet = br ? br.top + br.height*0.75 : innerHeight*0.75;
-  wrap.classList.add("arrive"); void wrap.offsetWidth; wrap.style.transition = "";
-  runner.style.top = Math.max(0, feet - 142 + scrollY) + "px";
-  runner.style.setProperty("--rx", Math.round((br ? br.left + br.width*0.12 : innerWidth*0.15) - 56) + "px");
-  runner.addEventListener("animationend", e => { if (e.target === runner) runner.remove(); });
+  if (zoomed) wrap.classList.add("arrive");
+  void wrap.offsetWidth; wrap.style.transition = "";
+  r.style.top = Math.max(0, feet - 142 + scrollY) + "px";
+  r.style.setProperty("--rx", Math.round((br ? br.left + br.width*0.12 : innerWidth*0.15) - 56) + "px");
+  r.addEventListener("animationend", e => { if (e.target === r) r.remove(); });
+  document.body.appendChild(r);
+  return r;
+}
+function playGag(delay){
+  if (reduceMotion) return;
+  gagTimers.forEach(clearTimeout);
+  document.querySelectorAll(".runner").forEach(x => x.remove());
+  const r = spawnRunner();
+  gagTimers = [setTimeout(() => r.classList.add("alarm"), delay),
+               setTimeout(() => { r.classList.remove("alarm"); r.classList.add("go"); }, delay + 900)];
+}
+(function(){
+  const doors = document.getElementById("doors"), lobby = document.getElementById("lobby");
+  const enter = key => {
+    if (reduceMotion) lobby.classList.remove("show");
+    else if (lobby.classList.contains("show")) {
+      lobby.classList.add("leave");
+      setTimeout(() => lobby.classList.remove("show", "leave"), 700);
+    }
+    if (key !== C.key) { useCluster(key); render(); }
+    wrap.classList.remove("arrive");
+    playGag(2020);
+  };
+  const showLobby = () => { lobby.classList.add("show"); lobby.querySelector("button").focus({preventScroll:true}); };
+  lobby.addEventListener("click", e => { const b = e.target.closest("[data-cluster]"); if (b) enter(b.dataset.cluster); });
+  if (reduceMotion) { doors.remove(); if (PRESET) wrap.classList.remove("arrive"); else showLobby(); return; }
   let started = false;
   const open = () => {
     if (started) return; started = true;
     doors.classList.add("unlock");
-    setTimeout(() => { doors.classList.add("open"); wrap.classList.remove("arrive"); }, 380);
-    setTimeout(() => runner.classList.add("alarm"), 2400);
-    setTimeout(() => { runner.classList.remove("alarm"); runner.classList.add("go"); }, 3300);
+    setTimeout(() => { doors.classList.add("open"); if (PRESET) enter(PRESET); else showLobby(); }, 380);
     setTimeout(() => doors.remove(), 2000);
   };
   doors.addEventListener("click", open);
